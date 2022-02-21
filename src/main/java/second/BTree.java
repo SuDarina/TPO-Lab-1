@@ -7,7 +7,6 @@ public class BTree {
     BTreeNode root;
     int MinDeg;
 
-    // Constructor
     public BTree(int deg) {
         this.root = null;
         this.MinDeg = deg;
@@ -22,11 +21,11 @@ public class BTree {
         return result;
     }
 
-    // Function to find key
     public BTreeNode search(int key) {
         result.clear();
         BTreeNode tmp;
         tmp = root == null ? null : root.search(key);
+        assert root != null;
         result.addAll(root.result);
         return tmp;
     }
@@ -39,14 +38,10 @@ public class BTree {
             root.keys[0] = key;
             root.num = 1;
         } else {
-            // When the root node is full, the tree will grow high
             if (root.num == 2 * MinDeg - 1) {
                 BTreeNode s = new BTreeNode(MinDeg, false);
-                // The old root node becomes a child of the new root node
                 s.children[0] = root;
-                // Separate the old root node and give a key to the new node
                 s.splitChild(0, root);
-                // The new root node has 2 child nodes. Move the old one over there
                 int i = 0;
                 if (s.keys[0] < key)
                     i++;
