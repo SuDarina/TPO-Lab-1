@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BTreeTest {
-    private BTree first = new BTree(3);
-    private BTree second = new BTree(3);
+    private final BTree first = new BTree(3);
+    private final BTree second = new BTree(3);
 
     @Test
     public void insertRemoveAndSearch() {
