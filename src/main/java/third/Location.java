@@ -32,7 +32,6 @@ public class Location {
         this.hasBuilding = hasBuilding;
         this.hasCrowd = hasCrowd;
         this.hasSpeaker = hasSpeaker;
-        initLocation();
     }
 
     public void initLocation() {
@@ -51,6 +50,7 @@ public class Location {
     }
 
     public void makeStory(){
+        initLocation();
         building.setFloors(3);
         building.setWindows(10);
         building.initPlatform();

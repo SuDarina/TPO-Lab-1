@@ -36,9 +36,10 @@ public class DomainModelTest{
 
 
 
-        @BeforeEach
+    @BeforeEach
     public void createLocation() {
         location = new Location(true, true, true);
+        location.initLocation();
     }
 
 //    Проверяет увидит ли Артур перед глазами нужное здание в
@@ -115,7 +116,7 @@ public class DomainModelTest{
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {" не", " "})
+    @ValueSource(strings = {" не"})
     public void isCheckFlyingFalse(String input) {
         assertEquals(location.getArthur().checkFlyingState(), input);
     }

@@ -22,7 +22,6 @@ public class Crowd {
 
     private boolean isListening() {
         return isScreaming = false;
-       // return false;
     }
 
     private void scream() {
