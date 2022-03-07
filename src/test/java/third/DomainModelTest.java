@@ -49,14 +49,14 @@ public class DomainModelTest{
         location.getBuilding().setFloors(floors);
         location.getBuilding().setWindows(windows);
         location.getArthur().setSeenBuilding(location.getBuilding());
-        assertEquals(location.getArthur().tryChaseWindow(), expected);
+        assertEquals(expected, location.getArthur().tryChaseWindow());
     }
 
     @ParameterizedTest
     @MethodSource("dataFlying")
     public void isArthurFlying(String state, boolean notice) {
         location.getArthur().notice(notice);
-        Assertions.assertEquals(location.getArthur().checkFlyingState(), state);
+        Assertions.assertEquals(state, location.getArthur().checkFlyingState());
     }
 
 //    Проверка инициализации платформы
@@ -65,7 +65,7 @@ public class DomainModelTest{
     public void isPlatformInit(int floors, int windows, boolean expected){
         location.getBuilding().setFloors(floors);
         location.getBuilding().setWindows(windows);
-        assertEquals(location.getBuilding().initPlatform(), expected);
+        assertEquals(expected, location.getBuilding().initPlatform());
     }
 
 // Может ли народ что-то делать на платформе, если платформа не установлена?
@@ -75,9 +75,9 @@ public class DomainModelTest{
         if(setPlatform){
             Platform platform = new Platform();
             location.getCrowd().setPlatform(platform);
-            assertEquals(location.getCrowd().doActionOnPlatform(), true);
+            assertTrue(location.getCrowd().doActionOnPlatform());
         } else {
-            assertEquals(location.getCrowd().doActionOnPlatform(), false);
+            assertFalse(location.getCrowd().doActionOnPlatform());
         }
     }
 
@@ -92,7 +92,7 @@ public class DomainModelTest{
         location.getCrowd().setPlatform(platform);
 
         location.getCrowd().doActionOnPlatform();
-        assertEquals(location.getCrowd().isScreaming, !containsSpeaker);
+        assertEquals(!containsSpeaker, location.getCrowd().isScreaming);
     }
 
 //    Тест, проверяющий действия спикера в зависимости от наличия/отсутствия народа на платформе
@@ -106,7 +106,7 @@ public class DomainModelTest{
         location.getSpeaker().setPlatform(platform);
 
         location.getCrowd().doActionOnPlatform();
-        assertEquals(location.getSpeaker().trySayingMessage(), containsCrowd);
+        assertEquals(containsCrowd, location.getSpeaker().trySayingMessage());
     }
 
     @Test
@@ -118,14 +118,14 @@ public class DomainModelTest{
     @ParameterizedTest
     @ValueSource(strings = {" не"})
     public void isCheckFlyingFalse(String input) {
-        assertEquals(location.getArthur().checkFlyingState(), input);
+        assertEquals(input, location.getArthur().checkFlyingState());
     }
 
     @ParameterizedTest
     @EmptySource
     public void isCheckFlyingTrue(String input) {
         location.getArthur().notice(true);
-        assertEquals(location.getArthur().checkFlyingState(), input);
+        assertEquals(input, location.getArthur().checkFlyingState());
     }
 
 }
