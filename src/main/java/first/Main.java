@@ -5,5 +5,6 @@ public class Main {
         SinTailor st = new SinTailor(0.01);
         System.out.println(st.sin(Math.PI * 4.1));
         System.out.println(Math.sin(2 * Math.PI));
+        System.out.println(Math.sin(-4 * Math.PI));
     }
 }

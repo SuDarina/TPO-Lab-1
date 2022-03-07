@@ -1,4 +1,4 @@
-package thirdTest;
+package third;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import third.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DomainModelTest{
 
-    static Location location;
+    Location location;
 
 //    Данные для теста isArthurChasingTheWindow()/initPlatform
 //    {int floors, int windows, boolean expected}
@@ -37,7 +36,7 @@ public class DomainModelTest{
 
 
     @BeforeEach
-    public void createLocation() {
+    public void setUp() {
         location = new Location(true, true, true);
         location.initLocation();
     }
@@ -77,8 +76,9 @@ public class DomainModelTest{
             Platform platform = new Platform();
             location.getCrowd().setPlatform(platform);
             assertEquals(location.getCrowd().doActionOnPlatform(), true);
-        } else
+        } else {
             assertEquals(location.getCrowd().doActionOnPlatform(), false);
+        }
     }
 
 //    Тест, проверяющий действия народа в зависимости от наличия/отсутствия спикера на платформе

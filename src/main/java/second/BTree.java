@@ -53,10 +53,10 @@ public class BTree {
         }
     }
 
-    public void remove(int key) {
+    public int remove(int key) {
         if (root == null) {
             System.out.println("The tree is empty");
-            return;
+            return 0;
         }
 
         root.remove(key);
@@ -67,5 +67,6 @@ public class BTree {
             else
                 root = root.children[0];
         }
+        return 1;
     }
 }

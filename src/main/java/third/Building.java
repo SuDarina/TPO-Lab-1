@@ -6,11 +6,6 @@ public class Building {
 
     public Building() {}
 
-    public Building(int floors, int windows) {
-        this.floors = floors;
-        this.windows = windows;
-    }
-
     private Platform platform;
 
     public int getFloors() {

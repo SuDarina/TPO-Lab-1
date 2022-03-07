@@ -2,7 +2,7 @@ package first;
 
 public class SinTailor {
 
-    private double fault;
+    private final double fault;
 
     public SinTailor(double fault) {
         this.fault = fault;
@@ -10,10 +10,6 @@ public class SinTailor {
 
     public double getFault() {
         return fault;
-    }
-
-    public void setFault(double fault) {
-        this.fault = fault;
     }
 
     private double sinTailor(double x, int n){
@@ -29,8 +25,7 @@ public class SinTailor {
         double current = 2;
         int n = 0;
 
-        x = Math.abs(x) >= Math.PI * 2 ? (x > 0 ? x - (Math.PI * 2 * (int)(x / (Math.PI * 2))) :
-                x + (Math.PI * 2 * (int)(x / (Math.PI * 2)))) : x;
+        x = Math.abs(x) >= Math.PI * 2 ? (x - (Math.PI * 2 * (int) (x / (Math.PI * 2)))) : x;
 
         while(Math.abs(current - previous) > this.getFault()){
             previous = current;

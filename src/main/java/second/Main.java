@@ -13,6 +13,8 @@ public class Main {
         first.insert(2);
         first.insert(12);
         first.insert(6);
+        first.remove(12);
+        System.out.println(first.search(89));
         System.out.println(first.traverse().toString());
 
     }

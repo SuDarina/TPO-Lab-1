@@ -1,7 +1,5 @@
-package firstTest;
+package first;
 
-import first.SinTailor;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -10,7 +8,6 @@ import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class FunctionTest {
 
     public static Collection<Object[]> data() {
@@ -21,7 +18,7 @@ public class FunctionTest {
                 {-Math.PI / 4, -Math.sqrt(2) / 2}, {-Math.PI / 3, -Math.sqrt(3) / 2},
                 {-2*Math.PI / 3, -Math.sqrt(3) / 2}, {-3* Math.PI / 4, -Math.sqrt(2) / 2},
                 {-5*Math.PI / 6, -0.5}, {-Math.PI, 0d}, {Math.PI, 0d}, {Math.PI / 2, 1d},
-                {-Math.PI / 2, -1d}
+                {-Math.PI / 2, -1d}, {-6 * Math.PI, 0d}
         });
     }
 

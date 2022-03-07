@@ -1,19 +1,20 @@
 package second;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BTreeNode {
-    public ArrayList<Integer> result = new ArrayList<>();
+    public List<Integer> result = new ArrayList<>();
     public int[] keys;
     int MinDeg;
-    BTreeNode[] children;
+    public BTreeNode[] children;
     int num;
     boolean isLeaf;
 
     public BTreeNode(int deg, boolean isLeaf) {
         this.MinDeg = deg;
         this.isLeaf = isLeaf;
-        this.keys = new int[2 * this.MinDeg - 1]; // Node has 2*MinDeg-1 keys at most
+        this.keys = new int[2 * this.MinDeg - 1];
         this.children = new BTreeNode[2 * this.MinDeg];
         this.num = 0;
     }
@@ -36,15 +37,18 @@ public class BTreeNode {
                 removeFromNonLeaf(idx);
         } else {
             if (isLeaf) {
-                System.out.printf("The key %d is does not exist in the tree\n", key);
+                System.out.printf("The key %d does not exist in the tree\n", key);
                 return;
             }
 
 
             boolean flag = idx == num;
 
-            if (children[idx].num < MinDeg)
+            System.out.println("children[idx].num:" + children[idx].num);
+            System.out.println("MinDeg: " + MinDeg);
+            if (children[idx].num < MinDeg){
                 fill(idx);
+            }
 
 
             if (flag && idx > num)
@@ -55,16 +59,19 @@ public class BTreeNode {
     }
 
     public void removeFromLeaf(int idx) {
-
-        for (int i = idx + 1; i < num; ++i)
-            keys[i - 1] = keys[i];
+        if (num - (idx + 1) >= 0)
+            System.arraycopy(keys, idx + 1, keys,
+                    idx + 1 - 1, num - (idx + 1));
         num--;
     }
 
     public void removeFromNonLeaf(int idx) {
 
         int key = keys[idx];
-
+        System.out.println("in rfnl");
+        System.out.println("children[idx].num: " + children[idx].num);
+        System.out.println("children[idx]: " + children[idx].traverse().toString());
+        System.out.println("idx: " + idx);
         if (children[idx].num >= MinDeg) {
             int pred = getPred(idx);
             keys[idx] = pred;
@@ -97,7 +104,7 @@ public class BTreeNode {
     }
 
     public void fill(int idx) {
-
+        System.out.println("here");
         if (idx != 0 && children[idx - 1].num >= MinDeg)
             borrowFromPrev(idx);
         else if (idx != num && children[idx + 1].num >= MinDeg)
@@ -111,6 +118,8 @@ public class BTreeNode {
     }
 
     public void borrowFromPrev(int idx) {
+        System.out.println("prev");
+
 
         BTreeNode child = children[idx];
         BTreeNode sibling = children[idx - 1];
@@ -133,6 +142,7 @@ public class BTreeNode {
     }
 
     public void borrowFromNext(int idx) {
+        System.out.println("next");
 
         BTreeNode child = children[idx];
         BTreeNode sibling = children[idx + 1];
@@ -229,7 +239,7 @@ public class BTreeNode {
     }
 
 
-    public ArrayList<Integer> traverse() {
+    public List<Integer> traverse() {
         int i;
         result.clear();
         for (i = 0; i < num; i++) {
